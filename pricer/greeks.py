@@ -1,10 +1,6 @@
 import numpy as np
 from scipy.stats import norm
-from pricer.black_scholes import _d1_d2
-
-def _check_option_type(option_type):
-    if option_type not in ("call", "put"):
-        raise ValueError(f"option_type must be 'call' or 'put', got {option_type!r}")
+from pricer.black_scholes import _d1_d2, _check_option_type
 
 
 def delta(S, K, T, r, sigma, q=0.0, option_type="call"):
