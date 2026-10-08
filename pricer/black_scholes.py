@@ -1,10 +1,10 @@
 import numpy as np
 from scipy.stats import norm
 
+
 def _check_option_type(option_type):
     if option_type not in ("call", "put"):
-        raise ValueError(f"option_type must be 'call' or 'put', got {option_type!r}")
-
+        raise ValueError(f"option_type must be 'call' or 'put', got {option_type!r}")    
 
 
 def _d1_d2(S, K, T, r, q, sigma):
@@ -24,17 +24,21 @@ def _d1_d2(S, K, T, r, q, sigma):
     return d1, d2
 
 
-
 def call_price(S, K, T, r, sigma, q=0.0):
-    """Calculate the Black-Scholes price of a European call option."""
-
+    """
+    Calculate the Black-Scholes price of a European call option.
+    """
     d1, d2 = _d1_d2(S, K, T, r, q, sigma)
     return S * np.exp(-q * T) * norm.cdf(d1) - K * np.exp(-r * T) * norm.cdf(d2)
 
 
-
 def put_price(S, K, T, r, sigma, q=0.0):
-    """Calculate the Black-Scholes price of a European put option."""
-
+    """
+    Calculate the Black-Scholes price of a European put option.
+    """
     d1, d2 = _d1_d2(S, K, T, r, q, sigma)
     return K * np.exp(-r * T) * norm.cdf(-d2) - S * np.exp(-q * T) * norm.cdf(-d1)
+
+
+
+

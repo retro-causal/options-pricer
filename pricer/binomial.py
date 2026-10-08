@@ -39,11 +39,13 @@ def binomial_price(S, K, T, r, sigma, q=0.0, option_type="call", steps=500, amer
 
     for i in range(steps - 1, -1, -1):
         V = disc * (p * V[1:] + (1 - p) * V[:-1])
-
+        # For American options, compare value from holding vs value from exercising now; choose the greater
         if american:
-            # For American options, compare value from holding vs value from exercising now; choose the greater
             ST = S * u**j[:i + 1] * d**(i - j[:i + 1])
             V = np.maximum(V, _payoff(ST, K, option_type))
     
     return V[0]
+
+
+
 
